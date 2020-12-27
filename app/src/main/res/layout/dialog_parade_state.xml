@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/platoon_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Platoon"
+        android:textStyle="bold"
+        android:textSize="48px"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/platoon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="48px"
+        app:layout_constraintLeft_toLeftOf="@id/platoon_title"
+        app:layout_constraintRight_toRightOf="@id/platoon_title"
+        app:layout_constraintTop_toBottomOf="@id/platoon_title" />
+
+    <TextView
+        android:id="@+id/first_last_parade_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="First/Last Parade"
+        android:textStyle="bold"
+        android:textSize="32px"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/first_last_parade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="32px"
+        app:layout_constraintLeft_toLeftOf="@id/first_last_parade_title"
+        app:layout_constraintRight_toRightOf="@id/first_last_parade_title"
+        app:layout_constraintTop_toBottomOf="@id/first_last_parade_title" />
+
+    <TextView
+        android:id="@+id/strength_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Strength"
+        android:textStyle="bold"
+        android:textSize="32px"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/strength"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="32px"
+        app:layout_constraintLeft_toLeftOf="@id/strength_title"
+        app:layout_constraintRight_toRightOf="@id/strength_title"
+        app:layout_constraintTop_toBottomOf="@id/strength_title" />
+
+    <TextView
+        android:id="@+id/report_sick_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reporting Sick"
+        android:textStyle="bold"
+        android:textSize="32px"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/platoon"
+        android:layout_marginTop="40px"/>
+
+    <TextView
+        android:id="@+id/report_sick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="32px"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/report_sick_title"/>
+
+    <TextView
+        android:id="@+id/medical_status_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Medical Status"
+        android:textStyle="bold"
+        android:textSize="32px"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/report_sick"
+        android:layout_marginTop="32px"/>
+
+    <TextView
+        android:id="@+id/medical_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="32px"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/medical_status_title" />
+
+    <TextView
+        android:id="@+id/medical_appointment_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Medical Appointment"
+        android:textStyle="bold"
+        android:textSize="32px"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/medical_status"
+        android:layout_marginTop="32px"/>
+
+    <TextView
+        android:id="@+id/medical_appointment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="32px"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/medical_appointment_title" />
+
+    <TextView
+        android:id="@+id/other_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Other"
+        android:textStyle="bold"
+        android:textSize="32px"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/medical_appointment"
+        android:layout_marginTop="32px"/>
+
+    <TextView
+        android:id="@+id/other"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="32px"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/other_title" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/parade_state_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/save_parade_state"
+        android:layout_marginBottom="20dp"
+        android:maxLines="4"
+        android:hint="Enter Parade State"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/save_parade_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/close_dialog"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/close_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Close"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/save_parade_state"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
