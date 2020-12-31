@@ -27,8 +27,6 @@ private lateinit var closeDialogButton: MaterialButton
 
 class ParadeStateDialog : DialogFragment() {
 
-    val RANKS = arrayOf("PTE", "LCP", "CPL", "CFC", "3SG", "2SG", "2LTA", "LTA")
-
     companion object {
         const val TAG = "ParadeStateDialog"
 
@@ -88,146 +86,23 @@ class ParadeStateDialog : DialogFragment() {
     }
 
     private fun updateUI(paradeState: String): String {
-        var platoon: String
-        var strength: String
-        var firstLastParade: String
-        var reportSick: String
-        var medicalStatus: String
-        var medicalAppointment: String
-        var other: String
-
         val paradeStateInfoPuller = ParadeStateInfoPuller(paradeState)
 
-        val paradeStateList = paradeState
-                .replace("*", "")
-                .split("\n").toMutableList()
-        paradeStateList.removeAll(arrayOf(" ", ""))
-        println(paradeStateList)
+        val platoon = paradeStateInfoPuller.getPlatoon()
+        val firstLastParade = paradeStateInfoPuller.getParadeType()
 
-        var lineOfInterest = paradeStateList.filter { line -> line.contains("TOTAL STRENGTH", ignoreCase = true) }[0]
-        var landmarkIndex = lineOfInterest.indexOf("TOTAL STRENGTH", ignoreCase = true)
+        println(platoon)
+        println(firstLastParade)
 
-        //PLATOON SECTION
-        platoon = if (lineOfInterest.substring(landmarkIndex - 2, landmarkIndex - 1).toIntOrNull() != null) {
-            lineOfInterest.substring(landmarkIndex - 2, landmarkIndex - 1)
-        } else {
-            "5"
-        }
-        platoonTextView.text = paradeStateInfoPuller.getPlatoon()
-
-        //STRENGTH SECTION
-        strength = lineOfInterest.substring(landmarkIndex + 16)
+        platoonTextView.text = platoon
         strengthTextView.text = paradeStateInfoPuller.getStrength()
-
-        //FIRST LAST PARADE SECTION
-        lineOfInterest = paradeStateList[1]
-        firstLastParade = lineOfInterest.substring(0, lineOfInterest.indexOf(" "))
-        firstLastParadeTextView.text = paradeStateInfoPuller.getParadeType()
-
+        firstLastParadeTextView.text = firstLastParade
         reportSickTextView.text = paradeStateInfoPuller.getReportingSick()
         medicalStatusTextView.text = paradeStateInfoPuller.getStatuses()
         medicalAppointmentTextView.text = paradeStateInfoPuller.getMedicalAppointments()
         otherTextView.text = paradeStateInfoPuller.getOthers()
 
-        //REPORTING SICK SECTION
-//        val reportSickIndexStart = paradeStateList.indexOf(paradeStateList.filter { line -> line.contains("Reporting Sick", ignoreCase = true) }[0]) + 1
-//        val reportSickIndexEnd = paradeStateList.indexOf(paradeStateList.filter { line -> line.contains("MEDICAL STATUS") }[0]) - 1
-//
-//        if (reportSickIndexStart > reportSickIndexEnd) {
-//            reportSick = "NIL"
-//            reportSickTextView.text = reportSick
-//        } else {
-//            reportSick = ""
-//            var counter = 1
-//            paradeStateList.subList(reportSickIndexStart, reportSickIndexEnd + 1).forEach { line ->
-//                RANKS.forEach {
-//                    if (line.contains(it)) {
-//                        reportSick += "${counter}) $line\n"
-//                        counter ++
-//                    }
-//                }
-//            }
-//
-//            if (reportSick == "") {
-//                reportSick = "NIL"
-//            }
-//            reportSickTextView.text = reportSick
-//        }
-
-        //MEDICAL STATUS SECTION
-//        val medicalStatusIndexStart = paradeStateList.indexOf(paradeStateList.filter { line -> line.contains("MEDICAL STATUS", ignoreCase = true) }[0]) + 1
-//        val medicalStatusSickIndexEnd = paradeStateList.indexOf(paradeStateList.filter { line -> line.contains("MEDICAL APPOINTMENTS", ignoreCase = true) }[0]) - 1
-//
-//        if (medicalStatusIndexStart > medicalStatusSickIndexEnd) {
-//            medicalStatus = "NIL"
-//            medicalStatusTextView.text = medicalStatus
-//        } else {
-//            medicalStatus = ""
-//            var counter = 1
-//            paradeStateList.subList(medicalStatusIndexStart, medicalStatusSickIndexEnd + 1).forEach { line ->
-//                RANKS.forEach {
-//                    if (line.contains(it)) {
-//                        medicalStatus += "${counter}) $line\n"
-//                        counter ++
-//                    }
-//                }
-//            }
-//
-//            if (medicalStatus == "") {
-//                medicalStatus = "NIL"
-//            }
-//            medicalStatusTextView.text = medicalStatus
-//        }
-
-        //MEDICAL APPOINTMENT SECTION
-//        val medicalAppointmentIndexStart = paradeStateList.indexOf(paradeStateList.filter { line -> line.contains("MEDICAL APPOINTMENTS", ignoreCase = true) }[0]) + 1
-//        val medicalAppointmentIndexEnd = paradeStateList.indexOf(paradeStateList.filter { line -> line.contains("OTHERS", ignoreCase = true) }[0]) - 1
-//
-//        if (medicalAppointmentIndexStart > medicalAppointmentIndexEnd) {
-//            medicalAppointment = "NIL"
-//            medicalAppointmentTextView.text = medicalAppointment
-//        } else {
-//            medicalAppointment = ""
-//            var counter = 1
-//            paradeStateList.subList(medicalAppointmentIndexStart, medicalAppointmentIndexEnd + 1).forEach { line ->
-//                RANKS.forEach {
-//                    if (line.contains(it)) {
-//                        medicalAppointment += "${counter}) $line\n"
-//                        counter ++
-//                    }
-//                }
-//            }
-//
-//            if (medicalAppointment == "") {
-//                medicalAppointment = "NIL"
-//            }
-//            medicalAppointmentTextView.text = medicalAppointment
-//        }
-
-        //OTHER SECTION
-//        val otherTitleIndex = paradeStateList.indexOf(paradeStateList.filter { line -> line.contains("OTHERS", ignoreCase = true) }[0])
-//        if (otherTitleIndex == paradeStateList.size - 1) {
-//            other = "NIL"
-//            otherTextView.text = other
-//        } else {
-//            other = ""
-//            var counter = 1
-//            paradeStateList.subList(otherTitleIndex + 1, paradeStateList.size).forEach { line ->
-//                RANKS.forEach {
-//                    if (line.contains(it)) {
-//                        other += "${counter}) $line\n"
-//                        counter ++
-//                    }
-//                }
-//            }
-//
-//            if (other == "") {
-//                other = "NIL"
-//            }
-//            otherTextView.text = other
-//        }
-
-        return "${paradeStateList[0].trim()}_${platoon}_$firstLastParade"
+        return "${paradeStateInfoPuller.getDate()}_${platoon}_$firstLastParade"
     }
 
     private fun saveParadeStateToFile(filename: String, data: String) {

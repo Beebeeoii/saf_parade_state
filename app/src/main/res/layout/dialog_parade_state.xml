@@ -68,81 +68,115 @@
         app:layout_constraintRight_toRightOf="@id/strength_title"
         app:layout_constraintTop_toBottomOf="@id/strength_title" />
 
-    <TextView
-        android:id="@+id/report_sick_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Reporting Sick"
-        android:textStyle="bold"
-        android:textSize="32px"
+    <LinearLayout
+        android:id="@+id/container_main"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/platoon"
-        android:layout_marginTop="40px"/>
+        app:layout_constraintBottom_toTopOf="@id/parade_state_input"
+        android:layout_marginTop="40px">
 
-    <TextView
-        android:id="@+id/report_sick"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="32px"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/report_sick_title"/>
+        <TextView
+            android:id="@+id/report_sick_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reporting Sick"
+            android:textStyle="bold"
+            android:textSize="32px" />
 
-    <TextView
-        android:id="@+id/medical_status_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Medical Status"
-        android:textStyle="bold"
-        android:textSize="32px"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/report_sick"
-        android:layout_marginTop="32px"/>
+        <ScrollView
+            android:id="@+id/report_sick_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/medical_status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="32px"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/medical_status_title" />
+            <TextView
+                android:id="@+id/report_sick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="32px" />
 
-    <TextView
-        android:id="@+id/medical_appointment_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Medical Appointment"
-        android:textStyle="bold"
-        android:textSize="32px"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/medical_status"
-        android:layout_marginTop="32px"/>
+        </ScrollView>
 
-    <TextView
-        android:id="@+id/medical_appointment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="32px"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/medical_appointment_title" />
+        <TextView
+            android:id="@+id/medical_status_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Medical Status"
+            android:textStyle="bold"
+            android:textSize="32px"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/report_sick_scroll_view"
+            android:layout_marginTop="32px"/>
 
-    <TextView
-        android:id="@+id/other_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Other"
-        android:textStyle="bold"
-        android:textSize="32px"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/medical_appointment"
-        android:layout_marginTop="32px"/>
+        <ScrollView
+            android:id="@+id/medical_status_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:layout_weight="2">
 
-    <TextView
-        android:id="@+id/other"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="32px"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/other_title" />
+            <TextView
+                android:id="@+id/medical_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="32px" />
+
+        </ScrollView>
+
+        <TextView
+            android:id="@+id/medical_appointment_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Medical Appointment"
+            android:textStyle="bold"
+            android:textSize="32px"
+            android:layout_marginTop="32px"/>
+
+        <ScrollView
+            android:id="@+id/medical_appointment_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:layout_weight="2">
+
+            <TextView
+                android:id="@+id/medical_appointment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="32px" />
+
+        </ScrollView>
+
+        <TextView
+            android:id="@+id/other_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Other"
+            android:textStyle="bold"
+            android:textSize="32px"
+            android:layout_marginTop="32px"/>
+
+        <ScrollView
+            android:id="@+id/other_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/other"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="32px" />
+
+        </ScrollView>
+
+    </LinearLayout>
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/parade_state_input"
