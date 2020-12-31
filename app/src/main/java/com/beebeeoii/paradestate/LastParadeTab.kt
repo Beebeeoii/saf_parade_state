@@ -157,7 +157,7 @@ class LastParadeTab : Fragment() {
             val f = SimpleDateFormat("ddMMyy")
             val date = f.format(calendarView.date)
 
-            val filename = "${date}_coyhq_last"
+            val filename = "${date}_5_last"
 
             var fileInputStream: FileInputStream?
             try {

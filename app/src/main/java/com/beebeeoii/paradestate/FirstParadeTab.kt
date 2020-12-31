@@ -161,7 +161,7 @@ class FirstParadeTab : Fragment() {
             val f = SimpleDateFormat("ddMMyy")
             val date = f.format(calendarView.date)
 
-            val filename = "${date}_coyhq_first"
+            val filename = "${date}_5_first"
 
             var fileInputStream: FileInputStream?
             try {
@@ -185,6 +185,30 @@ class FirstParadeTab : Fragment() {
             }
         }
 
+        generate_coy_parade_state.setOnClickListener {
+            var plt1Strength: Number
+            var plt2Strength: Number
+            var plt3Strength: Number
+            var plt4Strength: Number
+            var plt5Strength: Number
+
+            val f = SimpleDateFormat("ddMMyy")
+            val date = f.format(calendarView.date)
+            for (i in 1..5) {
+                val filename = "${date}_${i}_first"
+                try {
+                    activity?.openFileInput(filename)
+                } catch (e: Exception) {
+                    Toast.makeText(context, "Platoon $i parade state cannot be found!", Toast.LENGTH_SHORT).show()
+                    break
+                }
+            }
+        }
+
         return rootView
+    }
+
+    private fun generateCoyParadeState(plt1Strength: Number, plt2Strength: Number, plt3Strength: Number, plt4Strength: Number, plt5Strength: Number) {
+
     }
 }

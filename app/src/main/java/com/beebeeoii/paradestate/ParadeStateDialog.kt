@@ -75,7 +75,7 @@ class ParadeStateDialog : DialogFragment() {
 
     private fun setupClickListeners(view: View) {
         saveParadeStateButton.setOnClickListener {
-            val filename = updateUI(paradeStateInput.text.toString())
+            var filename = updateUI(paradeStateInput.text.toString().trim())
             println(filename)
 
             //SAVE TO FILE - "DDMMYY_(PLATOON)_(FIRST/LAST)"
@@ -96,6 +96,8 @@ class ParadeStateDialog : DialogFragment() {
         var medicalAppointment: String
         var other: String
 
+        val paradeStateInfoPuller = ParadeStateInfoPuller(paradeState)
+
         val paradeStateList = paradeState
                 .replace("*", "")
                 .split("\n").toMutableList()
@@ -109,116 +111,121 @@ class ParadeStateDialog : DialogFragment() {
         platoon = if (lineOfInterest.substring(landmarkIndex - 2, landmarkIndex - 1).toIntOrNull() != null) {
             lineOfInterest.substring(landmarkIndex - 2, landmarkIndex - 1)
         } else {
-            "COY HQ"
+            "5"
         }
-        platoonTextView.text = platoon
+        platoonTextView.text = paradeStateInfoPuller.getPlatoon()
 
         //STRENGTH SECTION
         strength = lineOfInterest.substring(landmarkIndex + 16)
-        strengthTextView.text = strength
+        strengthTextView.text = paradeStateInfoPuller.getStrength()
 
         //FIRST LAST PARADE SECTION
         lineOfInterest = paradeStateList[1]
         firstLastParade = lineOfInterest.substring(0, lineOfInterest.indexOf(" "))
-        firstLastParadeTextView.text = firstLastParade
+        firstLastParadeTextView.text = paradeStateInfoPuller.getParadeType()
+
+        reportSickTextView.text = paradeStateInfoPuller.getReportingSick()
+        medicalStatusTextView.text = paradeStateInfoPuller.getStatuses()
+        medicalAppointmentTextView.text = paradeStateInfoPuller.getMedicalAppointments()
+        otherTextView.text = paradeStateInfoPuller.getOthers()
 
         //REPORTING SICK SECTION
-        val reportSickIndexStart = paradeStateList.indexOf(paradeStateList.filter { line -> line.contains("Reporting Sick", ignoreCase = true) }[0]) + 1
-        val reportSickIndexEnd = paradeStateList.indexOf(paradeStateList.filter { line -> line.contains("MEDICAL STATUS") }[0]) - 1
-
-        if (reportSickIndexStart > reportSickIndexEnd) {
-            reportSick = "NIL"
-            reportSickTextView.text = reportSick
-        } else {
-            reportSick = ""
-            var counter = 1
-            paradeStateList.subList(reportSickIndexStart, reportSickIndexEnd + 1).forEach { line ->
-                RANKS.forEach {
-                    if (line.contains(it)) {
-                        reportSick += "${counter}) $line\n"
-                        counter ++
-                    }
-                }
-            }
-
-            if (reportSick == "") {
-                reportSick = "NIL"
-            }
-            reportSickTextView.text = reportSick
-        }
+//        val reportSickIndexStart = paradeStateList.indexOf(paradeStateList.filter { line -> line.contains("Reporting Sick", ignoreCase = true) }[0]) + 1
+//        val reportSickIndexEnd = paradeStateList.indexOf(paradeStateList.filter { line -> line.contains("MEDICAL STATUS") }[0]) - 1
+//
+//        if (reportSickIndexStart > reportSickIndexEnd) {
+//            reportSick = "NIL"
+//            reportSickTextView.text = reportSick
+//        } else {
+//            reportSick = ""
+//            var counter = 1
+//            paradeStateList.subList(reportSickIndexStart, reportSickIndexEnd + 1).forEach { line ->
+//                RANKS.forEach {
+//                    if (line.contains(it)) {
+//                        reportSick += "${counter}) $line\n"
+//                        counter ++
+//                    }
+//                }
+//            }
+//
+//            if (reportSick == "") {
+//                reportSick = "NIL"
+//            }
+//            reportSickTextView.text = reportSick
+//        }
 
         //MEDICAL STATUS SECTION
-        val medicalStatusIndexStart = paradeStateList.indexOf(paradeStateList.filter { line -> line.contains("MEDICAL STATUS", ignoreCase = true) }[0]) + 1
-        val medicalStatusSickIndexEnd = paradeStateList.indexOf(paradeStateList.filter { line -> line.contains("MEDICAL APPOINTMENTS", ignoreCase = true) }[0]) - 1
-
-        if (medicalStatusIndexStart > medicalStatusSickIndexEnd) {
-            medicalStatus = "NIL"
-            medicalStatusTextView.text = medicalStatus
-        } else {
-            medicalStatus = ""
-            var counter = 1
-            paradeStateList.subList(medicalStatusIndexStart, medicalStatusSickIndexEnd + 1).forEach { line ->
-                RANKS.forEach {
-                    if (line.contains(it)) {
-                        medicalStatus += "${counter}) $line\n"
-                        counter ++
-                    }
-                }
-            }
-
-            if (medicalStatus == "") {
-                medicalStatus = "NIL"
-            }
-            medicalStatusTextView.text = medicalStatus
-        }
+//        val medicalStatusIndexStart = paradeStateList.indexOf(paradeStateList.filter { line -> line.contains("MEDICAL STATUS", ignoreCase = true) }[0]) + 1
+//        val medicalStatusSickIndexEnd = paradeStateList.indexOf(paradeStateList.filter { line -> line.contains("MEDICAL APPOINTMENTS", ignoreCase = true) }[0]) - 1
+//
+//        if (medicalStatusIndexStart > medicalStatusSickIndexEnd) {
+//            medicalStatus = "NIL"
+//            medicalStatusTextView.text = medicalStatus
+//        } else {
+//            medicalStatus = ""
+//            var counter = 1
+//            paradeStateList.subList(medicalStatusIndexStart, medicalStatusSickIndexEnd + 1).forEach { line ->
+//                RANKS.forEach {
+//                    if (line.contains(it)) {
+//                        medicalStatus += "${counter}) $line\n"
+//                        counter ++
+//                    }
+//                }
+//            }
+//
+//            if (medicalStatus == "") {
+//                medicalStatus = "NIL"
+//            }
+//            medicalStatusTextView.text = medicalStatus
+//        }
 
         //MEDICAL APPOINTMENT SECTION
-        val medicalAppointmentIndexStart = paradeStateList.indexOf(paradeStateList.filter { line -> line.contains("MEDICAL APPOINTMENTS", ignoreCase = true) }[0]) + 1
-        val medicalAppointmentIndexEnd = paradeStateList.indexOf(paradeStateList.filter { line -> line.contains("OTHERS", ignoreCase = true) }[0]) - 1
-
-        if (medicalAppointmentIndexStart > medicalAppointmentIndexEnd) {
-            medicalAppointment = "NIL"
-            medicalAppointmentTextView.text = medicalAppointment
-        } else {
-            medicalAppointment = ""
-            var counter = 1
-            paradeStateList.subList(medicalAppointmentIndexStart, medicalAppointmentIndexEnd + 1).forEach { line ->
-                RANKS.forEach {
-                    if (line.contains(it)) {
-                        medicalAppointment += "${counter}) $line\n"
-                        counter ++
-                    }
-                }
-            }
-
-            if (medicalAppointment == "") {
-                medicalAppointment = "NIL"
-            }
-            medicalAppointmentTextView.text = medicalAppointment
-        }
+//        val medicalAppointmentIndexStart = paradeStateList.indexOf(paradeStateList.filter { line -> line.contains("MEDICAL APPOINTMENTS", ignoreCase = true) }[0]) + 1
+//        val medicalAppointmentIndexEnd = paradeStateList.indexOf(paradeStateList.filter { line -> line.contains("OTHERS", ignoreCase = true) }[0]) - 1
+//
+//        if (medicalAppointmentIndexStart > medicalAppointmentIndexEnd) {
+//            medicalAppointment = "NIL"
+//            medicalAppointmentTextView.text = medicalAppointment
+//        } else {
+//            medicalAppointment = ""
+//            var counter = 1
+//            paradeStateList.subList(medicalAppointmentIndexStart, medicalAppointmentIndexEnd + 1).forEach { line ->
+//                RANKS.forEach {
+//                    if (line.contains(it)) {
+//                        medicalAppointment += "${counter}) $line\n"
+//                        counter ++
+//                    }
+//                }
+//            }
+//
+//            if (medicalAppointment == "") {
+//                medicalAppointment = "NIL"
+//            }
+//            medicalAppointmentTextView.text = medicalAppointment
+//        }
 
         //OTHER SECTION
-        val otherTitleIndex = paradeStateList.indexOf(paradeStateList.filter { line -> line.contains("OTHERS", ignoreCase = true) }[0])
-        if (otherTitleIndex == paradeStateList.size - 1) {
-            other = "NIL"
-            otherTextView.text = other
-        } else {
-            other = ""
-            var counter = 1
-            paradeStateList.subList(otherTitleIndex + 1, paradeStateList.size).forEach { line ->
-                RANKS.forEach {
-                    if (line.contains(it)) {
-                        other += "${counter}) $line\n"
-                        counter ++
-                    }
-                }
-            }
-
-            if (other == "") {
-                other = "NIL"
-            }
-            otherTextView.text = other
-        }
+//        val otherTitleIndex = paradeStateList.indexOf(paradeStateList.filter { line -> line.contains("OTHERS", ignoreCase = true) }[0])
+//        if (otherTitleIndex == paradeStateList.size - 1) {
+//            other = "NIL"
+//            otherTextView.text = other
+//        } else {
+//            other = ""
+//            var counter = 1
+//            paradeStateList.subList(otherTitleIndex + 1, paradeStateList.size).forEach { line ->
+//                RANKS.forEach {
+//                    if (line.contains(it)) {
+//                        other += "${counter}) $line\n"
+//                        counter ++
+//                    }
+//                }
+//            }
+//
+//            if (other == "") {
+//                other = "NIL"
+//            }
+//            otherTextView.text = other
+//        }
 
         return "${paradeStateList[0].trim()}_${platoon}_$firstLastParade"
     }
