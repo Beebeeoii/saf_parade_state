@@ -1,18 +1,24 @@
-package com.beebeeoii.paradestate
+package com.beebeeoii.paradestate.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import com.beebeeoii.paradestate.R
+import com.beebeeoii.paradestate.helper.ParadeStateInfoPuller
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import java.io.FileNotFoundException
 import java.io.FileOutputStream
 import java.io.IOException
+import java.util.*
 
 private lateinit var platoonTextView: TextView
 private lateinit var firstLastParadeTextView: TextView
@@ -52,8 +58,10 @@ class ParadeStateDialog : DialogFragment() {
         closeDialogButton = rootView.findViewById(R.id.close_dialog)
 
         val paradeState = arguments!!.getString("data")
-        if (paradeState != null) {
-            updateUI(paradeState)
+        if (paradeState != "") {
+            if (paradeState != null) {
+                updateUI(paradeState)
+            }
         }
         return rootView
     }
@@ -73,11 +81,14 @@ class ParadeStateDialog : DialogFragment() {
 
     private fun setupClickListeners(view: View) {
         saveParadeStateButton.setOnClickListener {
-            var filename = updateUI(paradeStateInput.text.toString().trim())
-            println(filename)
-
-            //SAVE TO FILE - "DDMMYY_(PLATOON)_(FIRST/LAST)"
+            val filename = updateUI(paradeStateInput.text.toString().trim())
             saveParadeStateToFile(filename, paradeStateInput.text.toString())
+
+            paradeStateInput.text?.clear()
+            paradeStateInput.clearFocus()
+            paradeStateInput.inputType = InputType.TYPE_NULL
+
+            Snackbar.make(view, "Parade state saved!", Snackbar.LENGTH_SHORT).show()
         }
 
         closeDialogButton.setOnClickListener {
@@ -87,28 +98,42 @@ class ParadeStateDialog : DialogFragment() {
 
     private fun updateUI(paradeState: String): String {
         val paradeStateInfoPuller = ParadeStateInfoPuller(paradeState)
+        val platoon: String
+        val paradeType: String
+        val strength: String
+        val reportingSick: String
+        val statuses: String
+        val medicalAppointments: String
+        val others: String
 
-        val platoon = paradeStateInfoPuller.getPlatoon()
-        val firstLastParade = paradeStateInfoPuller.getParadeType()
-
-        println(platoon)
-        println(firstLastParade)
+        try {
+            platoon = paradeStateInfoPuller.getPlatoon()
+            paradeType = paradeStateInfoPuller.getParadeType()
+            strength = paradeStateInfoPuller.getStrength()
+            reportingSick = paradeStateInfoPuller.getReportingSick()
+            statuses = paradeStateInfoPuller.getStatuses()
+            medicalAppointments = paradeStateInfoPuller.getMedicalAppointments()
+            others = paradeStateInfoPuller.getOthers()
+        } catch (e: java.lang.Exception) {
+            Toast.makeText(context, "Saved parade state is invalid. Please update!", Toast.LENGTH_SHORT).show()
+            return ""
+        }
 
         platoonTextView.text = platoon
-        strengthTextView.text = paradeStateInfoPuller.getStrength()
-        firstLastParadeTextView.text = firstLastParade
-        reportSickTextView.text = paradeStateInfoPuller.getReportingSick()
-        medicalStatusTextView.text = paradeStateInfoPuller.getStatuses()
-        medicalAppointmentTextView.text = paradeStateInfoPuller.getMedicalAppointments()
-        otherTextView.text = paradeStateInfoPuller.getOthers()
+        strengthTextView.text = strength
+        firstLastParadeTextView.text = paradeType
+        reportSickTextView.text = reportingSick
+        medicalStatusTextView.text = statuses
+        medicalAppointmentTextView.text = medicalAppointments
+        otherTextView.text = others
 
-        return "${paradeStateInfoPuller.getDate()}_${platoon}_$firstLastParade"
+        return "${paradeStateInfoPuller.getDate()}_${platoon}_$paradeType"
     }
 
     private fun saveParadeStateToFile(filename: String, data: String) {
         val fileOutputStream: FileOutputStream
         try {
-            fileOutputStream = activity?.openFileOutput(filename.toLowerCase(), Context.MODE_PRIVATE)!!
+            fileOutputStream = activity?.openFileOutput(filename.toLowerCase(Locale.ROOT), Context.MODE_PRIVATE)!!
             fileOutputStream.write(data.toByteArray())
         } catch (e: FileNotFoundException){
             e.printStackTrace()

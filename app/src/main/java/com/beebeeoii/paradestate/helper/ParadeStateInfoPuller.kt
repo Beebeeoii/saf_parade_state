@@ -1,4 +1,4 @@
-package com.beebeeoii.paradestate
+package com.beebeeoii.paradestate.helper
 
 class ParadeStateInfoPuller(paradeState: String) {
 
@@ -11,7 +11,6 @@ class ParadeStateInfoPuller(paradeState: String) {
 
     init {
         paradeStateList.removeAll(arrayOf(" ", ""))
-        println(paradeStateList)
     }
 
     fun getDate(): String {
@@ -34,18 +33,18 @@ class ParadeStateInfoPuller(paradeState: String) {
         val lineOfInterest = paradeStateList.filter { line -> line.contains("TOTAL STRENGTH", ignoreCase = true) }[0]
         val landmarkIndex = lineOfInterest.indexOf("TOTAL STRENGTH", ignoreCase = true)
 
-        return lineOfInterest.substring(landmarkIndex + 16)
+        return lineOfInterest.substring(landmarkIndex + 16).trim()
     }
 
     fun getParadeType(): String {
         val lineOfInterest = paradeStateList[1]
-        return lineOfInterest.substring(0, lineOfInterest.indexOf(" "))
+        return lineOfInterest.substring(0, lineOfInterest.indexOf(" ")).trim()
     }
 
     fun getReportingSick(): String {
         var reportSick: String
-        val reportSickIndexStart = paradeStateList.indexOf(paradeStateList.filter { line -> line.contains("Reporting Sick", ignoreCase = true) }[0]) + 1
-        val reportSickIndexEnd = paradeStateList.indexOf(paradeStateList.filter { line -> line.contains("MEDICAL STATUS") }[0]) - 1
+        val reportSickIndexStart = paradeStateList.indexOf(paradeStateList.filter { line -> line.contains("REPORTING SICK", ignoreCase = true) }[0]) + 1
+        val reportSickIndexEnd = paradeStateList.indexOf(paradeStateList.filter { line -> line.contains("MEDICAL STATUS", ignoreCase = true) }[0]) - 1
 
         if (reportSickIndexStart > reportSickIndexEnd) {
             reportSick = "NIL"

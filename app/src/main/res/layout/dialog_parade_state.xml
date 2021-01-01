@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,9 +10,9 @@
         android:id="@+id/platoon_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Platoon"
+        android:text="@string/platoon_title"
         android:textStyle="bold"
-        android:textSize="48px"
+        android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:textSize="48px"
+        android:textSize="22sp"
         app:layout_constraintLeft_toLeftOf="@id/platoon_title"
         app:layout_constraintRight_toRightOf="@id/platoon_title"
         app:layout_constraintTop_toBottomOf="@id/platoon_title" />
@@ -32,9 +31,9 @@
         android:id="@+id/first_last_parade_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="First/Last Parade"
+        android:text="@string/parade_type_title"
         android:textStyle="bold"
-        android:textSize="32px"
+        android:textSize="12sp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:textSize="32px"
+        android:textSize="12sp"
         app:layout_constraintLeft_toLeftOf="@id/first_last_parade_title"
         app:layout_constraintRight_toRightOf="@id/first_last_parade_title"
         app:layout_constraintTop_toBottomOf="@id/first_last_parade_title" />
@@ -52,9 +51,9 @@
         android:id="@+id/strength_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Total Strength"
+        android:text="@string/strength_title"
         android:textStyle="bold"
-        android:textSize="32px"
+        android:textSize="12sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -63,7 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:textSize="32px"
+        android:textSize="12sp"
         app:layout_constraintLeft_toLeftOf="@id/strength_title"
         app:layout_constraintRight_toRightOf="@id/strength_title"
         app:layout_constraintTop_toBottomOf="@id/strength_title" />
@@ -77,15 +76,15 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/platoon"
         app:layout_constraintBottom_toTopOf="@id/parade_state_input"
-        android:layout_marginTop="40px">
+        android:layout_marginTop="12dp">
 
         <TextView
             android:id="@+id/report_sick_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Reporting Sick"
+            android:text="@string/reporting_sick_title"
             android:textStyle="bold"
-            android:textSize="32px" />
+            android:textSize="12sp" />
 
         <ScrollView
             android:id="@+id/report_sick_scroll_view"
@@ -98,7 +97,7 @@
                 android:id="@+id/report_sick"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="32px" />
+                android:textSize="12sp" />
 
         </ScrollView>
 
@@ -106,12 +105,12 @@
             android:id="@+id/medical_status_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Medical Status"
+            android:text="@string/medical_status_title"
             android:textStyle="bold"
-            android:textSize="32px"
+            android:textSize="12sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/report_sick_scroll_view"
-            android:layout_marginTop="32px"/>
+            android:layout_marginTop="12dp"/>
 
         <ScrollView
             android:id="@+id/medical_status_scroll_view"
@@ -124,7 +123,7 @@
                 android:id="@+id/medical_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="32px" />
+                android:textSize="12sp" />
 
         </ScrollView>
 
@@ -132,10 +131,10 @@
             android:id="@+id/medical_appointment_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Medical Appointment"
+            android:text="@string/medical_appointment_title"
             android:textStyle="bold"
-            android:textSize="32px"
-            android:layout_marginTop="32px"/>
+            android:textSize="12sp"
+            android:layout_marginTop="12dp"/>
 
         <ScrollView
             android:id="@+id/medical_appointment_scroll_view"
@@ -148,7 +147,7 @@
                 android:id="@+id/medical_appointment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="32px" />
+                android:textSize="12sp" />
 
         </ScrollView>
 
@@ -156,10 +155,10 @@
             android:id="@+id/other_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Other"
+            android:text="@string/other_title"
             android:textStyle="bold"
-            android:textSize="32px"
-            android:layout_marginTop="32px"/>
+            android:textSize="12sp"
+            android:layout_marginTop="12dp"/>
 
         <ScrollView
             android:id="@+id/other_scroll_view"
@@ -172,7 +171,7 @@
                 android:id="@+id/other"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="32px" />
+                android:textSize="12sp" />
 
         </ScrollView>
 
@@ -187,13 +186,13 @@
         app:layout_constraintBottom_toTopOf="@id/save_parade_state"
         android:layout_marginBottom="20dp"
         android:maxLines="4"
-        android:hint="Enter Parade State"/>
+        android:hint="@string/parade_state_input_hint_title"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/save_parade_state"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save"
+        android:text="@string/save_parade_state_title"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/close_dialog"
         app:layout_constraintBottom_toBottomOf="parent" />
@@ -202,7 +201,7 @@
         android:id="@+id/close_dialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Close"
+        android:text="@string/close_dialog_title"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toRightOf="@id/save_parade_state"

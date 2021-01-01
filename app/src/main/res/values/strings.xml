@@ -1,5 +1,23 @@
 <resources>
-    <string name="app_name">ParadeState</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">Parade State</string>
+
+    <string name="platoon_1_title">Platoon 1</string>
+    <string name="platoon_2_title">Platoon 2</string>
+    <string name="platoon_3_title">Platoon 3</string>
+    <string name="platoon_4_title">Platoon 4</string>
+    <string name="platoon_5_title">Coy HQ</string>
+
+    <string name="generate_coy_parade_state_title">Generate company
+        Parade State</string>
+
+    <string name="platoon_title">Platoon</string>
+    <string name="parade_type_title">Parade Type</string>
+    <string name="strength_title">Strength</string>
+    <string name="reporting_sick_title">Reporting Sick</string>
+    <string name="medical_status_title">Medical Status</string>
+    <string name="medical_appointment_title">Medical Appointment</string>
+    <string name="other_title">Other</string>
+    <string name="parade_state_input_hint_title">Enter Parade State</string>
+    <string name="save_parade_state_title">Save</string>
+    <string name="close_dialog_title">Close</string>
 </resources>

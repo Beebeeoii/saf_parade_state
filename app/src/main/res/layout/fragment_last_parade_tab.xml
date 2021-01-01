@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".LastParadeTab">
+    tools:context=".fragments.LastParadeTab">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/platoon_1"
@@ -23,8 +24,8 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Platoon 1"
-            android:textSize="36px"
+            android:text="@string/platoon_1_title"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:layout_gravity="center" />
 
@@ -47,8 +48,8 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Platoon 2"
-            android:textSize="36px"
+            android:text="@string/platoon_2_title"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:layout_gravity="center" />
 
@@ -71,8 +72,8 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Platoon 3"
-            android:textSize="36px"
+            android:text="@string/platoon_3_title"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:layout_gravity="center" />
 
@@ -95,8 +96,8 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Platoon 4"
-            android:textSize="36px"
+            android:text="@string/platoon_4_title"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:layout_gravity="center" />
 
@@ -119,8 +120,8 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Coy HQ"
-            android:textSize="36px"
+            android:text="@string/platoon_5_title"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:layout_gravity="center" />
 
@@ -143,8 +144,8 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Generate Coy\nParade State"
-            android:textSize="36px"
+            android:text="@string/generate_coy_parade_state_title"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:layout_gravity="center"
             android:gravity="center"/>

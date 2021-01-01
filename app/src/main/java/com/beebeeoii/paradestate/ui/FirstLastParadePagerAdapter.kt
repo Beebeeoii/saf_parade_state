@@ -1,8 +1,10 @@
-package com.beebeeoii.paradestate
+package com.beebeeoii.paradestate.ui
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.beebeeoii.paradestate.fragments.FirstParadeTab
+import com.beebeeoii.paradestate.fragments.LastParadeTab
 
 class FirstLastParadePagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
 
